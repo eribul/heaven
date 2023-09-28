@@ -13,16 +13,16 @@ List Matcher(int Ncontrols, // Desired number of controls
 	     NumericVector controls, // controls ID
 	     NumericVector cases, // cases ID
 	     int Ndateterms, // number of dateterm variables - zero=0
-	     NumericMatrix datescases, // case dates 
+	     NumericMatrix datescases, // case dates
 	     NumericMatrix datescontrols, // control dates
-	     int Ndurationterms, // number of duration variables - zero=0	     
+	     int Ndurationterms, // number of duration variables - zero=0
 	     NumericMatrix durationcases,
 	     NumericMatrix durationcontrols,
 	     NumericVector durationMin){
   int ii; // while counter - number of selected controls
   int controlCounter;// Sequencer through list of controls - endFollowUp
   int innerCounter=0;
-  arma::vec neworder(Tcontrols); 
+  arma::vec neworder(Tcontrols);
   for (int u=0;u<Tcontrols;u++){neworder(u)=u;}
   bool IsCoEl;  // preliminary test of selectability
   std::vector<int> selectedControls; // output controls
@@ -37,21 +37,21 @@ List Matcher(int Ncontrols, // Desired number of controls
     // Rcout << "i: " << i << std::endl;
     // shuffle order in which controls are considered
     ii=1; // while counter - number of selected controls for a case
-    innerCounter=0; 
+    innerCounter=0;
     arma::vec currentorder = arma::shuffle(neworder);
     controlCounter = currentorder(innerCounter);
     if (Ndurationterms>0){
-      for (int k=0; k<Ndurationterms; k++){	
+      for (int k=0; k<Ndurationterms; k++){
 	casehasduration(k) = (caseIndex[i]-durationcases(i,k))>durationMin(k);
       }
     }
-    while (innerCounter<Tcontrols && ii<=Ncontrols){ 
+    while (innerCounter<Tcontrols && ii<=Ncontrols){
       controlCounter=currentorder(innerCounter);
       //A control must be at risk at the case's case date
-      IsCoEl= (caseIndex[i]<endFollowUp[controlCounter]) && std::find(selectedControls.begin(), selectedControls.end(), controls[controlCounter]) == selectedControls.end());
+      IsCoEl= (caseIndex[i]<endFollowUp[controlCounter]) && std::find(selectedControls.begin(), selectedControls.end(), controls[controlCounter]) == selectedControls.end();
       // Rcout << "caseIndex[i]: " << caseIndex[i] << std::endl;
-      // Rcout << "endFollowUp[controlCounter]: " << endFollowUp[controlCounter] << std::endl;      
-      // Rcout << "IsCoEl: " << IsCoEl << std::endl;      
+      // Rcout << "endFollowUp[controlCounter]: " << endFollowUp[controlCounter] << std::endl;
+      // Rcout << "IsCoEl: " << IsCoEl << std::endl;
       // Time dependent matching variables:
       // event dates of case and control must be on the same side of the case index date
       if(IsCoEl && Ndateterms>0){ // Additional logic with time varying conditions to be before case date
@@ -64,9 +64,9 @@ List Matcher(int Ncontrols, // Desired number of controls
       // Exposure window:
       // a control is only a control if difference between
       // case dato and intro into our study is larger than expWindow
-      // Rcout << "IsCoEl: " << IsCoEl << std::endl;      
+      // Rcout << "IsCoEl: " << IsCoEl << std::endl;
       if(IsCoEl && Ndurationterms>0){ // Additional logic with time varying conditions to be before case date
-	for (int k=0; k<Ndurationterms; k++){	
+	for (int k=0; k<Ndurationterms; k++){
 	  controlhasduration = (caseIndex[i]-durationcontrols(i,k))>durationMin(k);
 	  IsCoEl= IsCoEl && ((casehasduration(k) == controlhasduration));
 	}
@@ -75,15 +75,15 @@ List Matcher(int Ncontrols, // Desired number of controls
 	// Rcout << "-------: "<< std::endl;
 	// Rcout << "caseIndex[i]: " << caseIndex[i] << std::endl;
 	// Rcout << "endFollowUp[controlCounter]: " << endFollowUp[controlCounter] << std::endl;
-	// Rcout << "controls[controlCounter]: " << endFollowUp[controlCounter] << std::endl;      
-	// Rcout << "IsCoEl: " << IsCoEl << std::endl;      
+	// Rcout << "controls[controlCounter]: " << endFollowUp[controlCounter] << std::endl;
+	// Rcout << "IsCoEl: " << IsCoEl << std::endl;
 	selectedControls.push_back(controls[controlCounter]); //next selected control
 	selectedCases.push_back(cases[i]); //case-id for that control
 	ii+=1; // next control to be selected
       }
       innerCounter+=1;
     } // end while
-  }// End loop for each case  
+  }// End loop for each case
 			  return List::create(Named("selectedCases") = selectedCases,
 					      Named("selectedControls") = selectedControls);
 }
