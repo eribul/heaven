@@ -49,8 +49,7 @@ List Matcher(int Ncontrols, // Desired number of controls
       controlCounter=currentorder(innerCounter);
       //A control must be at risk at the case's case date
       IsCoEl = (caseIndex[i]<endFollowUp[controlCounter]) &&
-        std::find(selectedControls.begin(), selectedControls.end(), controls[controlCounter]) == selectedControls.end() &&
-        std::find(cases.begin(), cases.end(), controls[controlCounter]) == cases.end();
+        std::find(selectedControls.begin(), selectedControls.end(), controls[controlCounter]) == selectedControls.end();
       // Rcout << "caseIndex[i]: " << caseIndex[i] << std::endl;
       // Rcout << "endFollowUp[controlCounter]: " << endFollowUp[controlCounter] << std::endl;
       // Rcout << "IsCoEl: " << IsCoEl << std::endl;
