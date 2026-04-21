@@ -8,7 +8,7 @@ splitTwo(indat,splitdat,invars,splitvars,format="wide",datacheck=TRUE)
 }
 \arguments{
 \item{indat}{A data.table or data.frame whose first 3 columns are:
-\itemize{
+\describe{
 \item{id}{ Person identification variable such as PNR. The data may contain 
 multiple lines per subject.}
 \item{start}{ Start of time interval. Either a date or an integer/numeric.}
@@ -19,24 +19,24 @@ numeric/integer.}
 \item{splitdat}{The splitting guide. A data.table which contains person 
 specific information about the onset dates of comorbidities and other events.
 Wide format:
-\itemize{
+\describe{
 \item{id}{ Person identification variable such as PNR. The data may contain 
 multiple lines per subject.}
 \item{Date 1}{ Either a date or an integer/numeric. Format must match that of 
 the start and stop of arguments 
-\code{indat} The onset date of comorbidity 1 or other event. If 
+\code{indat}. The onset date of comorbidity 1 or other event. If 
 integer/numeric it can be time since a baseline date on project specific 
 scale (e.g., days or months).}
 \item{Date 2}{ Either a date or an integer/numeric. The onset date of 
 comorbidity 2 or other event. If integer/numeric it can be time since a 
 baseline date on project specific scale (e.g., days or months).}
-\item{Dat3 ....}
+\item{Dat3 ...}{Additional date variables to split on.}
 }
 Long format:
-\itemize{
+\describe{
 \item{id}{ Person identification variable such as PNR. The data may contain 
 multiple lines per subject.}
-\item{Condition name}{Character providing the variable name of condition} 
+\item{Condition name}{Character providing the variable name of condition.} 
 \item{Date}{ Either a date or an integer/numeric. The onset date of 
 comorbidity or other event. If integer/numeric it can be time since a 
 baseline date on project specific scale (e.g., days or months).}
@@ -112,10 +112,7 @@ for decent results that care is taken that all dates are defined similarly.
 The output will always have the "next" period starting on the day where the
 last period ended. This is to ensure that period lengths are calculated pro-
 perly. The program will also allow periods of zero lengths which is a conse-
-quence when multiple splits are made on the same day. 
-
-This function is identical to the lexisTwo function with the change that 
-"events" are not considered.
+quence when multiple splits are made on the same day.
 }
 \examples{
 library(data.table)
@@ -148,9 +145,6 @@ splitTwo(dat # in-data with id/in/out
    ,c("pnr","start","end") #names of id/in/out - in that order
    ,c("pnr","name","value")
    ,format="long") 
-}
-\seealso{
-lexisTwo
 }
 \author{
 Christian Torp-Pedersen

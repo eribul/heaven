@@ -1,31 +1,27 @@
 Package: heaven
 Type: Package
 Title: Data Preparation Routines for Medical Registry Data
-Version: 2022.07.13
+Version: 2026.04.16
 Author: Helene Charlotte Rytgaard, Anders Munch, Christian Torp-Pedersen, Jannik Pallisgaard, Regitze Kuhr Skals, Peter Enemark Lund, Thomas Alexander Gerds
 Maintainer: Thomas A. Gerds <tag@biostat.ku.dk>
-Description: Fast and furious implementations of often used data preparation steps.
-             These functions are adapted to Danish registry data.  Designed to be used with Statistics Denmark
+Description: Provides fast implementations of common data preparation steps. These functions are adapted to Danish registry data and designed to be used with Statistics Denmark.
 Depends:
     R (>= 3.5.0)
 Encoding: UTF-8
 Imports:
-    ggplot2,
     data.table(>= 1.9.6),
     stats,
-    graphics,
     parallel,
     foreach,
     utils,
-    Rcpp,
+    Rcpp (>= 1.0.14),
     lava,
     lubridate,
-    scales,
-    tools,
-    ISOweek,
-    usethis
+    tools
 LinkingTo: Rcpp, RcppArmadillo
 Suggests:
+    ggplot2,
+    scales,
     zoo,
     testthat,
     doParallel,
@@ -37,9 +33,10 @@ Suggests:
     knitr,
     survminer,
     rmarkdown,
-    R.rsp
+    R.rsp,
+    rtmle
 License: GPL (>= 3)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.3
 VignetteBuilder: knitr,R.rsp
 LazyData: true
 Collate: 
@@ -52,6 +49,7 @@ Collate:
     'exposureMatch.R'
     'findConditions.R'
     'getAdmLimits.R'
+    'globals.R'
     'groupAges.R'
     'guessRawdataDirectory.R'
     'heaven-data.R'
@@ -65,6 +63,7 @@ Collate:
     'lexisSeq.R'
     'lexisTwo.R'
     'listRawdata.R'
+    'longToWideList.R'
     'matchReport.R'
     'medicinMacro.R'
     'mm1.R'
@@ -73,20 +72,17 @@ Collate:
     'patientProfiles.R'
     'poissonRisk.R'
     'poissonregression.R'
-    'print.riskSetMatch.R'
-    'print.whattodo.R'
     'sasWhereConstructors.R'
     'scanRawdata.R'
     'simAdmissionData.R'
     'simPop.R'
     'simPrescriptionData.R'
-    'simpoisson.R'
+    'simulate_trial.R'
     'splitFromTo.R'
     'splitSeq.R'
     'splitTwo.R'
     'standardize.prodlim.R'
     'standardize.proportion.R'
     'standardize.rate.R'
-    'use_drake_project.R'
-    'whatToDo.R'
     'xrecepter.R'
+Config/testthat/edition: 3

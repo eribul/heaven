@@ -21,10 +21,10 @@ example: c("id","start","end","value","name") - must be in that order!}
 
 \item{default}{- Value given to intervals not given a value by the function.}
 
-\item{datacheck}{- This function can crash or produce incorrect results if
+\item{datacheck}{- This function would crash or produce incorrect results if
 input data have overlapping intervals or negative intervals in any of the two
-input datasets.  Thic is checked and error produced by datacheck. Can be 
-omitted if data are checked otherwise}
+input datasets.  Ts is checked and error produced by datacheck. Can be 
+set to FALSE if data are checked otherwise}
 }
 \value{
 The function returns a new data table where records have been split according 
@@ -33,12 +33,11 @@ left unchanged.
 }
 \description{
 splitFromTo is devised to split a series of records in multiple records based
-on entry/exit dates provided from another splitting guide dataset. At start
-each record has variables representing stand and end of time - after the
-split time of a split record end at the time of a split one one record and
-represent the start of time on the next record.
+on entry/exit dates provided from another splitting guide dataset. The function
+can handle multiple different events with each type of event characterized by
+the variable "value".
 
-The function is useful for analysis of data where temporary events occur.
+The function is useful for analysis of data where temporary changes occur.
 These may be drugs treatment, pregnancy etc.  For a situation of pregnancy
 for example it may be useful for analysis to split a person into three 
 records representing time before, during and after pregnancy.
@@ -47,6 +46,9 @@ The input is first "base data" id/in/out (and other variables) that
 may already have been split by other functions.  The other data is a sequence 
 of id/from/to/value/name - that may represent multiple conditions with 
 from/to and with "name" to distinguish.
+
+When no value is provided by the splitting guide the "default" is used. If
+this is not provided the value is set to "0"
 }
 \details{
 The input to this function are two data.tables and two lists of the critical 
@@ -54,18 +56,15 @@ variables.  The BASE data it the data to be split.
 This data must have a variable to identify participants and start/end times. 
 
 The other table (SPLITTINGUIDE) contains possibly multiple records for each 
-participants with id/from/to/value/name.
+participants with id/from/to/value/name - or just id/from/to
 
 The program checks that intervals are not negative and that intervals for 
 each "name" and each individual do not overlap.  Violation stops the program 
 with error. Overlaps may occur in real situations, but the user needs to make 
-decisions regarding this prior to this function.
+decisions regarding this prior to using this function.
 
-It is required that the splittingguide contains at least one record.  
+It is required that the splitting guide contains at least one record.  
 Missing data for key variables are not allowed and will cause errors.
-
-This function is identical to the lexisFromTo function with the change that 
-"events" are not considered.
 }
 \examples{
 library(data.table)
@@ -83,10 +82,8 @@ split[]
 temp <- splitFromTo(dat # inddato with id/in/out/event
                    ,split # Data with id and dates
                    ,c("id","start","end") #names of id/in/out/event - in that order
-                  ,c("id","start","end","value","name")) #Nmes var date-vars to split by
-}
-\seealso{
-splitFromTo
+                  ,c("id","start","end","value","name")) #Names var date-vars to split by
+temp[]                   
 }
 \author{
 Christian Torp-Pedersen

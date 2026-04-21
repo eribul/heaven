@@ -7,7 +7,7 @@
 #' Quann (Am J Epidemiol.2011 173:676-82), partly from DMCG.dk benchmarking 
 #' consortium and with further minor adjustments provided by Peter Ascanius 
 #' Jacobsen.  It is unlikely that any international list of definitions will 
-#' apply for a Danish Population and the listing used should be either cited or
+#' apply for a Danish population and the listing used should be either cited or
 #' provided in a supplement for publication.  The data included in this package
 #' "charlson.codes" includes a selection of ICD8 and ICD10 codes.  ICD9 has
 #' never been used in Denmark.
@@ -54,11 +54,11 @@ charlsonIndex <- function(data,ptid='pnr',vars,data.date,charlson.date,look.back
   weight=component=dcast=X=severe.liver.disease=mild.liver.disease=diabetes.with.complications=diabetes.without.complications=
     metastatic.solid.tumor=any.malignancy=melt=value=NULL
   if(!"data.frame" %in% class(data)) stop('data not dat.fram or data.table')
-  if(!class(vars)=='character') stop ('search variables not character')
-  if(!class(ptid)=='character') stop ('ptid not character')
-  if(!class(data.date)=='character') stop ('data.date not character')
-  if(!class(charlson.date)=='character') stop ('charlson.date not character')
-  if(!class(look.back)=='numeric') stop('look.back not numeric')
+  if(!is.character(vars)) stop ('search variables not character')
+  if(!is.character(ptid)) stop ('ptid not character')
+  if(!is.character(data.date)) stop ('data.date not character')
+  if(!is.character(charlson.date)) stop ('charlson.date not character')
+  if(!is.numeric(look.back)) stop('look.back not numeric')
   #Select relevant span in data
   datt <- copy(data)
   setDT(datt)
