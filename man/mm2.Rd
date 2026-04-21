@@ -18,23 +18,25 @@ mm2(
 )
 }
 \arguments{
-\item{drugs}{}
+\item{drugs}{wefg}
 
-\item{drugdb}{}
+\item{drugdb}{weg}
 
-\item{admdb}{}
+\item{admdb}{wedg}
 
-\item{periods}{}
+\item{periods}{werg}
 
-\item{method}{}
+\item{method}{werg}
 
-\item{stash}{}
+\item{stash}{werg}
 
-\item{cap.values}{}
+\item{cap.values}{werg}
 
-\item{pre.window}{}
+\item{pre.window}{werg}
 
-\item{print.time}{}
+\item{print.time}{werg}
+
+\item{verbose}{bla bla?}
 }
 \value{
 Exposure period in a given time span
@@ -67,8 +69,8 @@ So overwrite previous estimate from last period.
 Handle case with only one period (set the estimate to the default dosis)
 NB: non-purchases or total.drug==0 might be given default doses here, but this is restored below.
 Clean up for the edge case of the pre.period: Re-estimate the total drug at start point by substracting the estimated amount of drug spend before start date.
-Then overwrite and drop .after.start info for the pre.periods. 
-Also overwrite drug info for the cases with no drug left at the start date to not cause confusion. 
+Then overwrite and drop .after.start info for the pre.periods.
+Also overwrite drug info for the cases with no drug left at the start date to not cause confusion.
 From this we calculate other summary measures:
 Set n.purchases==0 to estimated dose and days.supply  = 0 (as they are capped or set to default above above):
 Also leave out period with 0 days (appears because of the ending dates):

@@ -17,3 +17,5 @@
 ^vignettes/.*\.(html|pdf|asis)$
 ^MODERNIZATION_NOTES\.md$
 ^heaven\.Rproj$
+.github
+^\.github$

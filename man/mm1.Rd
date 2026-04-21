@@ -17,21 +17,23 @@ mm1(
 )
 }
 \arguments{
-\item{drugs}{}
+\item{drugs}{asdf}
 
-\item{drugdb}{}
+\item{drugdb}{dsfb}
 
-\item{admdb}{}
+\item{admdb}{dfgh}
 
-\item{time.points}{}
+\item{time.points}{dgh}
 
-\item{window}{}
+\item{window}{sdgh}
 
-\item{method}{}
+\item{method}{dgh}
 
-\item{stash}{}
+\item{stash}{dgh}
 
-\item{cap.values}{}
+\item{cap.values}{dhg}
+
+\item{verbose}{bla bla?}
 }
 \value{
 Exposed or not at a given time
